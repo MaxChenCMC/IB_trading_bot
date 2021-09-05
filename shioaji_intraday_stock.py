@@ -41,10 +41,10 @@ def bid_increase(contract):
 def bounce_trade_stock(contract, dd_target, dd_recent, vol_gain):
     """
     觸發條件：
-    1. 日內回撤大於「參數2」
-    2. 近十分鐘回撤大於「參數3」
-    3. 當下價格大於前3分K的均價
-    4. 當下成交量是過去10分K均量的「參數4」
+    1. 日內回撤「> 3%」
+    2. 近十分鐘回撤「> 1%」
+    3. 當下價格 > 前3分K的均價
+    4. 當下成交量是過去10分K均量的「1.33倍」
     """
     df = ohlc(contract)
     mdd = max(df["Close"].to_drawdown_series() * -100)
