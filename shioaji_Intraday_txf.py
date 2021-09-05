@@ -22,16 +22,6 @@ am = tday + " 08:46:00"
 pm = tday + " 15:01:00"
 
 
-def ohlc(sid, start, end):
-    """
-    獲取個股的1分K價量
-    """
-    df = pd.DataFrame({**api.kbars(api.Contracts.Stocks[sid], start, end)})
-    df.ts = pd.to_datetime(df.ts)
-    df.set_index("ts", inplace=True)
-    return df[["Open", "High", "Low", "Close", "Volume"]]
-
-
 def ohlc_txf(sid, start, end):
     """
     獲取台指期的1分K價量
@@ -56,10 +46,10 @@ def bid_increase(contract):
 while True:
     """
     台指期日盤策略：
-    1. 振幅全距僅50點內
+    1. 近15分鐘跌點「> 50」
     2. 最新報價大於3分K均價
     3. 近3分K均量大於目前成交易前20大的90%
-    4. 前十大權值股，超過4檔的符合 bid_increase 函式條件
+    4. 前10大權值股，超過4檔的符合「bid_increase函式」的條件   
     """
     df = ohlc_txf("TXF202109", tday, tday)[am:]
     cond1 = max(df["High"][-15:]) - df["Close"][-1] > 50
