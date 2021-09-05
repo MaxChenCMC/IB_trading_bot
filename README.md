@@ -16,6 +16,7 @@ Processing high frequency data from broker’s official API(Sonipac-Shioaji, Cap
 
 ☛ 條件達成後，掛比成交價低1個tick的委買價
 
+
 台指期日盤交易策略：
 1. 近15分鐘跌點「> 50」
 2. 最新報價大於3分K均價
